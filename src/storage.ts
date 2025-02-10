@@ -1,8 +1,8 @@
-import * as fs from "fs";
-import * as path from "path";
-import { Product } from "./parser";
+// src/storage.ts
+import * as fs from 'fs';
+import * as path from 'path';
 
-export function saveProducts(products: Product[]): void {
+export function saveProducts(products: any[]): void {
   const dataDir = path.join(__dirname, "../data");
   if (!fs.existsSync(dataDir)) {
     fs.mkdirSync(dataDir);

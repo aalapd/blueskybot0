@@ -1,5 +1,6 @@
-import * as fs from "fs";
-import * as path from "path";
+// src/logger.ts
+import * as fs from 'fs';
+import * as path from 'path';
 
 export function writeLog(message: string): void {
   const logDir = path.join(__dirname, "../logs");
