@@ -25,7 +25,19 @@ jobs:
         run: npm run bot
         env: 
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-
+      
+      - name: Configure Git User
+        run: |
+          git config --local user.name "GitHub Actions Bot"
+          git config --local user.email "actions@github.com"
+      
+      - name: Commit and Push changes
+        run: |
+          git add data/products.json
+          git commit -m "Update products.json with latest scraped data" || echo "No changes to commit" # Commit only if there are changes
+          git push origin main
+        continue-on-error: true # In case of no changes to commit, continue workflow
+  
       - name: Archive Scraped Data
         uses: actions/upload-artifact@v4
         with:
