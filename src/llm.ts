@@ -22,7 +22,7 @@ export async function parseWithGemini(markdownContent: string): Promise<any> {
   const prompt = `
     Please parse the following content and extract the details for all product listings on the page. Each product listing should be represented as an object with exactly two properties:
     - "product_title": the text contained after the ###,
-    - "product_url": the URL found right above the title inside the square brackets.
+    - "product_url": the website URL to the product. This URL is not 'www.launchingnext.com' URL. It is a URL that points to the product's actual website.
     Ensure there is no mismatch between the product title and URL.
     Return a JSON array containing one object per product. For example:
     [
@@ -51,10 +51,3 @@ export async function parseWithGemini(markdownContent: string): Promise<any> {
     throw new Error(`Error parsing LLM output: ${responseText}`);
   }
 }
-
-async function run() {
-  const parsed = await parseWithGemini("###...example content...###");
-  console.log(parsed);
-}
-
-run();
