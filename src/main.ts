@@ -3,25 +3,37 @@ import { scrapeLaunchingNext } from "./scraper";
 import { parseWithGemini } from "./llm";
 import { writeLog } from "./logger";
 import { saveProducts } from "./storage";
+import { filterProducts } from "./filter";
 
 async function main() {
   try {
     writeLog("Starting daily scrape.");
-
     const rawData = await scrapeLaunchingNext();
     writeLog("Scrape successful.");
     console.log("Raw data snippet:", rawData.slice(0, 300));
-
-    // Pass the raw data (which should contain the JSON with HTML) to Gemini for parsing.
+    
+    // Pass the raw data to Gemini for parsing.
+    // We assume the LLM returns an array of product objects (each with product_title and product_url).
     const parsedResult = await parseWithGemini(rawData);
     writeLog("LLM parsing successful.");
-    console.log("LLM parsed result:", parsedResult.slice(0, 100));
+    console.log("LLM parsed result:", JSON.stringify(parsedResult).slice(0, 300));
+    
+    // Ensure we have an array of new products.
+    //let newProducts = Array.isArray(parsedResult) ? parsedResult : [parsedResult];
+    
+    // Filter out products from producthunt.com and launchingnext.com
+    const { filteredProducts, removedProducts } = filterProducts(parsedResult);
 
-    // Save the result in an array (for now, wrapping the object in an array).
-    saveProducts([parsedResult]);
+    if (removedProducts.length > 0) {
+      writeLog(`Removed ${removedProducts.length} products: ${JSON.stringify(removedProducts, null, 2)}`);
+      console.log("Removed products:", JSON.stringify(removedProducts).slice(0, 100));
+    }
+
+    // Save only new products (appending if not already present) to the JSON file.
+    saveProducts(filteredProducts);
     writeLog("Products saved successfully.");
 
-    // Save the results one-by-one to a database and check if any of the URLs have already been saved.
+    // Save the results one-by-one to a local database while keeping the URLs unique.
 
     // LOOP 4-6 TIMES A DAY>>>
 
