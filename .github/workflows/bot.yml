@@ -6,7 +6,7 @@ on:
   workflow_dispatch:  # Also allow manual trigger
 
 jobs:
-  scrape:
+  run-bot:
     runs-on: ubuntu-latest
 
     steps:
@@ -25,7 +25,7 @@ jobs:
         run: npm run bot
 
       - name: Archive Scraped Data
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: scraped-data
+          name: product-data
           path: data/products.json
