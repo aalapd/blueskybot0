@@ -1,12 +1,12 @@
-name: Daily Scraper Run
+name: Product Poster Run
 
 on:
   schedule:
-    - cron: '0 0 * * *'  # Runs daily at midnight UTC
+    - cron: '30 */6 * * *'  # Runs every 6 hours
   workflow_dispatch:  # Also allow manual trigger
 
 jobs:
-  run-scraper:
+  run-poster:
     runs-on: ubuntu-latest
 
     steps:
@@ -21,10 +21,13 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Run Scraper
-        run: npm run scrape
-        env: 
+      - name: Run Poster
+        run: npm run post
+        env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           MONGODB_DBNAME: ${{ secrets.MONGODB_DBNAME }}
           MONGODB_COLLNAME: ${{ secrets.MONGODB_COLLNAME }}
           MONGODB_URI: ${{ secrets.MONGODB_URI }}
+          BLUESKY_SERVICE_URL: ${{ secrets.BLUESKY_SERVICE_URL }}
+          BLUESKY_IDENTIFIER: ${{ secrets.BLUESKY_IDENTIFIER }}
+          BLUESKY_PASSWORD: ${{ secrets.BLUESKY_PASSWORD }}
