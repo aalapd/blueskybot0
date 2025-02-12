@@ -31,6 +31,6 @@ jobs:
           MONGODB_DBNAME: ${{ secrets.MONGODB_DBNAME }}
           MONGODB_COLLNAME: ${{ secrets.MONGODB_COLLNAME }}
           MONGODB_URI: ${{ secrets.MONGODB_URI }}
-          BLUESKY_SERVICE_URL: ${{ secrets.BLUESKY_SERVICE_URL }}
+          BLUESKY_SERVICE_URL: ${{ secrets.BLUESKY_SERVICE }}
           BLUESKY_IDENTIFIER: ${{ secrets.BLUESKY_IDENTIFIER }}
           BLUESKY_PASSWORD: ${{ secrets.BLUESKY_PASSWORD }}
