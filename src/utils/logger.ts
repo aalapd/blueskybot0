@@ -2,7 +2,10 @@
 import * as fs from 'fs';
 import * as path from 'path';
 
+import { fileURLToPath } from 'url';
+
 export function writeLog(message: string): void {
+  const __dirname = path.dirname(fileURLToPath(import.meta.url));
   const logDir = path.join(__dirname, "../../logs");
   if (!fs.existsSync(logDir)) {
     fs.mkdirSync(logDir);

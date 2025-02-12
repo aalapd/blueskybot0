@@ -1,24 +1,26 @@
 {
-    "scripts": {
-        "scrape": "ts-node --esm src/main.ts",
-        "post": "ts-node --esm src/post.ts",
-        "test": "jest"
-    },
-    "devDependencies": {
-        "@types/jest": "^29.5.14",
-        "@types/node": "^22.13.1",
-        "axios": "^1.7.9",
-        "jest": "^29.7.0",
-        "ts-jest": "^29.2.5",
-        "ts-node": "^10.9.2"
-    },
-    "dependencies": {
-        "@atproto/api": "^0.13.35",
-        "@google/generative-ai": "^0.21.0",
-        "@types/node-fetch": "^2.6.12",
-        "dotenv": "^16.4.7",
-        "mongodb": "^6.13.0",
-        "node-fetch": "^3.3.2"
-    },
-    "type": "module"
+  "scripts": {
+    "build": "tsc",
+    "scrape": "node dist/main.js",
+    "post": "node dist/post.js",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.14",
+    "@types/node": "^22.13.1",
+    "axios": "^1.7.9",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
+  },
+  "dependencies": {
+    "@atproto/api": "^0.13.35",
+    "@google/generative-ai": "^0.21.0",
+    "@types/node-fetch": "^2.6.12",
+    "dotenv": "^16.4.7",
+    "mongodb": "^6.13.0",
+    "node-fetch": "^3.3.2"
+  },
+  "type": "module"
 }

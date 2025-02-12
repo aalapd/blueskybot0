@@ -3,11 +3,11 @@ import {
   getProducts,
   markProductAsPosted,
   closeDatabaseConnection,
-} from "./modules/storage";
-import { scrapeProductPage, getProductPageScreenshot } from "./modules/scraper";
-import { parseProductPageContent } from "./modules/llm";
-import { postToBluesky } from "./modules/bluesky";
-import { writeLog } from "./utils/logger";
+} from "./modules/storage.js";
+import { scrapeProductPage, getProductPageScreenshot } from "./modules/scraper.js";
+import { parseProductPageContent } from "./modules/llm.js";
+import { postToBluesky } from "./modules/bluesky.js";
+import { writeLog } from "./utils/logger.js";
 
 async function post(): Promise<void> {
   try {

@@ -1,9 +1,9 @@
 // src/main.ts
-import { scrapeNewProducts } from "./modules/scraper";
-import { parseProducts } from "./modules/llm";
-import { writeLog } from "./utils/logger";
-import { saveProducts, closeDatabaseConnection } from "./modules/storage";
-import { filterProducts } from "./modules/filter";
+import { scrapeNewProducts } from "./modules/scraper.js";
+import { parseProducts } from "./modules/llm.js";
+import { writeLog } from "./utils/logger.js";
+import { saveProducts, closeDatabaseConnection } from "./modules/storage.js";
+import { filterProducts } from "./modules/filter.js";
 
 async function main() {
   try {

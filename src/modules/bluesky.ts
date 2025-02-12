@@ -1,18 +1,26 @@
 // src/modules/bluesky.ts
 import { AtpAgent, RichText } from "@atproto/api";
-import { writeLog } from "../utils/logger";
+import { writeLog } from "../utils/logger.js";
 
-require('dotenv').config();
+import dotenv from 'dotenv';
+dotenv.config();
+
 
 // Read service and credentials from environment variables
 const service = process.env.BLUESKY_SERVICE;
 const identifier = process.env.BLUESKY_IDENTIFIER;
 const password = process.env.BLUESKY_PASSWORD;
 
+if (!service) {
+  throw new Error("BLUESKY_SERVICE environment variable is not defined");
+}
 const agent = new AtpAgent({ service });
 
 async function login(): Promise<void> {
   if (!agent.session) {
+    if (!identifier || !password) {
+      throw new Error("BLUESKY_IDENTIFIER or BLUESKY_PASSWORD environment variable is not defined");
+    }
     await agent.login({ identifier, password });
     writeLog("Logged in to Bluesky successfully.");
   }

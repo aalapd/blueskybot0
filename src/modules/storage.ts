@@ -8,11 +8,13 @@ export interface StoredProduct {
   posted: boolean;
 }
 
-require('dotenv').config();
+import dotenv from 'dotenv';
+dotenv.config();
+
 
 const dbName = process.env.MONGODB_DBNAME;
-const collectionName = process.env.MONGODB_COLLNAME;
-const uri = process.env.MONGODB_URI;
+const collectionName = process.env.MONGODB_COLLNAME!;
+const uri = process.env.MONGODB_URI!;
 
 let client: MongoClient | null = null;
 
@@ -29,7 +31,7 @@ export async function getProducts(): Promise<Collection<StoredProduct>> {
     console.log("Connected to MongoDB Atlas.");
   }
   const db: Db = client.db(dbName);
-  const collection: Collection<StoredProduct> = db.collection(collectionName);
+  const collection: Collection<StoredProduct> = db.collection(collectionName!);
   // Create a unique index on product_url to enforce uniqueness and improve query speed.
   await collection.createIndex({ product_url: 1 }, { unique: true });
   return collection;
