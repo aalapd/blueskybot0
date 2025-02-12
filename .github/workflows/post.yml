@@ -17,12 +17,12 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '18'
-      
-      - name: Run Build
-        run: npm run build
-
+  
       - name: Install Dependencies
         run: npm install
+
+      - name: Run Build
+        run: npm run build
 
       - name: Run Poster
         run: npm run post
