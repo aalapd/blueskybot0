@@ -1,7 +1,7 @@
 {
     "scripts": {
-        "scrape": "ts-node src/main.ts",
-        "post": "ts-node src/post.ts",
+        "scrape": "ts-node --esm src/main.ts",
+        "post": "ts-node --esm src/post.ts",
         "test": "jest"
     },
     "devDependencies": {
