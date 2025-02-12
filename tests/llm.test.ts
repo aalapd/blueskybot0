@@ -1,4 +1,4 @@
-import { parseWithGemini, parseProductPageContent } from "../src/modules/llm";
+import { parseProducts, parseProductPageContent } from "../src/modules/llm";
 
 describe("LLM Module Integration Tests", () => {
   // describe("parseWithGemini", () => {

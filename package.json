@@ -1,6 +1,7 @@
 {
     "scripts": {
         "scrape": "ts-node src/main.ts",
+        "post": "ts-node src/post.ts",
         "test": "jest"
     },
     "devDependencies": {
@@ -12,7 +13,10 @@
         "ts-node": "^10.9.2"
     },
     "dependencies": {
+        "@atproto/api": "^0.13.35",
         "@google/generative-ai": "^0.21.0",
-        "mongodb": "^6.13.0"
+        "@types/node-fetch": "^2.6.12",
+        "mongodb": "^6.13.0",
+        "node-fetch": "^3.3.2"
     }
 }
