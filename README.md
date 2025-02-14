@@ -1,6 +1,8 @@
 # BLUESKYBOT0
 A little bot that scrapes the web for new product launches and posts them to Bluesky.
-See the bot in action [here](https://launchbot.bsky.social).
+
+* [See the bot in action](https://launchbot.bsky.social). 
+* [Read a guide on building this yourself](https://aalapdavjekar.medium.com/build-a-bluesky-bot-automate-social-media-posting-web-scraping-with-this-in-depth-tutorial-cf087570fc9f).
 
 ## Overview
 This project automates the process of discovering, summarizing, and sharing new product launches. It consists of two main scripts: `src/main.ts` for scraping and processing new product listings, and `src/post.ts` for posting product summaries to Bluesky. Both scripts are designed to run as automated GitHub Workflows, ensuring regular updates.
