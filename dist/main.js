@@ -18,11 +18,11 @@ function main() {
         try {
             writeLog("Starting daily scrape.");
             const rawData = yield scrapeNewProducts();
-            writeLog("Scrape successful.");
+            writeLog("Scrape module exited.");
             console.log("Raw data snippet:", rawData.slice(0, 300));
             // Pass the raw data to Gemini for parsing.
             const parsedResult = yield parseProducts(rawData);
-            writeLog("LLM parsing successful.");
+            writeLog("LLM module exited.");
             console.log("LLM parsed result:", JSON.stringify(parsedResult).slice(0, 300));
             // Filter out products from producthunt.com and launchingnext.com
             const { filteredProducts, removedProducts } = filterProducts(parsedResult);

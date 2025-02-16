@@ -1,19 +1,24 @@
 // src/scraper.ts
 import axios from "axios";
 import fetch from "node-fetch";
+import { writeLog } from ".././utils/logger.js";
 
-const url = "https://r.jina.ai/https://www.launchingnext.com";
+const scraperUrl = "https://r.jina.ai/";
+const landingPageUrl = "https://www.launchingnext.com/?ref=producthunt";
 
 export async function scrapeNewProducts(): Promise<string> {
   try {
-    const response = await axios.get(url, {
+    const response = await axios.get(`${scraperUrl}${landingPageUrl}`, {
       headers: {
         "X-No-Cache": "true",
         "X-Return-Format": "markdown",
+        'X-With-Shadow-Dom': 'true'
       },
     });
+    writeLog(`Scraped ${landingPageUrl} successfully.`);
     return response.data;
   } catch (error) {
+    writeLog(`Error scraping ${landingPageUrl}: ${error}`);
     throw error;
   }
 }
@@ -27,7 +32,7 @@ export async function scrapeProductPage(
   productPageUrl: string
 ): Promise<string> {
   try {
-    const url = `https://r.jina.ai/${productPageUrl}`;
+    const url = `${scraperUrl}${productPageUrl}`;
     const headers = {
       Accept: "text/event-stream",
       "X-Base": "final",
@@ -47,7 +52,6 @@ export async function getProductPageScreenshot(
   productPageUrl: string
 ): Promise<string> {
   try {
-    const url = "https://r.jina.ai/";
     const headers = {
       "Content-Type": "application/json",
       "X-No-Cache": "true",
@@ -60,7 +64,7 @@ export async function getProductPageScreenshot(
       ],
     };
 
-    const response = await fetch(url, {
+    const response = await fetch(scraperUrl, {
       method: "POST",
       headers: headers,
       body: JSON.stringify(data),

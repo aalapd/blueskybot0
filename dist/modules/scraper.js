@@ -10,19 +10,24 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 // src/scraper.ts
 import axios from "axios";
 import fetch from "node-fetch";
-const url = "https://r.jina.ai/https://www.launchingnext.com";
+import { writeLog } from ".././utils/logger.js";
+const scraperUrl = "https://r.jina.ai/";
+const landingPageUrl = "https://www.launchingnext.com/?ref=producthunt";
 export function scrapeNewProducts() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const response = yield axios.get(url, {
+            const response = yield axios.get(`${scraperUrl}${landingPageUrl}`, {
                 headers: {
                     "X-No-Cache": "true",
                     "X-Return-Format": "markdown",
+                    'X-With-Shadow-Dom': 'true'
                 },
             });
+            writeLog(`Scraped ${landingPageUrl} successfully.`);
             return response.data;
         }
         catch (error) {
+            writeLog(`Error scraping ${landingPageUrl}: ${error}`);
             throw error;
         }
     });
@@ -35,7 +40,7 @@ export function scrapeNewProducts() {
 export function scrapeProductPage(productPageUrl) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const url = `https://r.jina.ai/${productPageUrl}`;
+            const url = `${scraperUrl}${productPageUrl}`;
             const headers = {
                 Accept: "text/event-stream",
                 "X-Base": "final",
@@ -55,7 +60,6 @@ export function scrapeProductPage(productPageUrl) {
 export function getProductPageScreenshot(productPageUrl) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const url = "https://r.jina.ai/";
             const headers = {
                 "Content-Type": "application/json",
                 "X-No-Cache": "true",
@@ -67,7 +71,7 @@ export function getProductPageScreenshot(productPageUrl) {
                     "// Remove headers, footers, navigation elements\ndocument.querySelectorAll('header, footer, nav').forEach(el => el.remove());\n\n// Or a url that returns a valid JavaScript code snippet\n// https://example.com/script.js",
                 ],
             };
-            const response = yield fetch(url, {
+            const response = yield fetch(scraperUrl, {
                 method: "POST",
                 headers: headers,
                 body: JSON.stringify(data),
