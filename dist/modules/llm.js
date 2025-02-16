@@ -79,16 +79,16 @@ export function parseProductPageContent(productContent) {
         };
         const prompt = `
 Please parse the following content of a product page and generate a concise summary of the product's key features and value proposition. 
-Use a professional and journalistic tone. Use less than 300 characters. Be truthful and maintain accuracy. Only respond with the contents of the summary. 
-If the content is not sufficient to generate a summary, return an empty string.
+Do not write marketing copy. Use a professional and journalistic tone and write a neutral summary. Use less than 300 characters. Be truthful and maintain accuracy. Only respond with the contents of the summary. 
+If the content is not sufficient to generate a proper product summary, return an empty string.
 
 Example Response 1: 
 
-Mistral Small 3 is a latency-optimized 24B-parameter model under Apache 2.0 license, competitive with larger models like Llama 3.3 70B. It excels in low-latency tasks and is efficient for local deployment, boasting 81% accuracy on MMLU and 150 tokens/s.'
+Mistral Small 3 is a latency-optimized 24B-parameter model under Apache 2.0 license, competitive with larger models like Llama 3.3 70B. It excels in low-latency tasks and is efficient for local deployment, boasting 81% accuracy on MMLU and 150 tokens/s.
 
 Example Response 2:
 
-Palify offers professional networking for Gen Z and Millennials. Create a profile to manage jobs, collaborate, share content, and build community. Promote your brand and connect with others, all in one spot!
+Palify offers a networking service for Gen Z and Millennials. Create a profile to manage jobs, collaborate, share content, and build community. The platform is designed to help users connect and grow their careers.
 
 Content: ${productContent} `;
         const chatSession = model.startChat({
